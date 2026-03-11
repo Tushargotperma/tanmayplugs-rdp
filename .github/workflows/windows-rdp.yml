@@ -10,28 +10,27 @@ jobs:
 
     steps:
 
-    - name: Developer Banner
-      run: |
-        echo ============================
-        echo Free Windows RDP
-        echo Dev: TanmayPlugs
-        echo ============================
+      - name: Developer Banner
+        run: |
+          echo ============================
+          echo Free Windows RDP
+          echo Dev: TanmayPlugs
+          echo ============================
 
-    - name: Enable RDP
-      run: |
-        Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -name "fDenyTSConnections" -value 0
-        Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
+      - name: Enable RDP
+        run: |
+          Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -name "fDenyTSConnections" -value 0
+          Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
 
-    - name: Create User
-      run: |
-        net user runner Tanmay@2007 /add
-        net localgroup administrators runner /add
+      - name: Create User
+        run: |
+          net user runner Tanmay@2007 /add
+          net localgroup administrators runner /add
 
-    - name: Download Cloudflared
-      run: |
-        Invoke-WebRequest https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-windows-amd64.exe -OutFile cloudflared.exe
+      - name: Download Cloudflared
+        run: |
+          Invoke-WebRequest https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-windows-amd64.exe -OutFile cloudflared.exe
 
-    - name: Start Tunnel
-       run: |
-         .\cloudflared.exe tunnel --url 
-       tcp://localhost:3389
+      - name: Start Tunnel
+        run: |
+          .\cloudflared.exe tunnel --url tcp://localhost:3389
