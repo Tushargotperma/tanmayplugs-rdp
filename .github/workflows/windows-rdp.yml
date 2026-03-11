@@ -34,4 +34,5 @@ jobs:
     - name: Start Tunnel
   run: |
     ./cloudflared.exe tunnel --url tcp://localhost:3389
-    Start-Sleep -Seconds 15
+  run:
+Start-Process cloudflared.exe
