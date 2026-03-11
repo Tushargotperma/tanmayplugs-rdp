@@ -13,8 +13,8 @@ jobs:
     - name: Developer Banner
       run: |
         echo ============================
-        echo  Free Windows RDP
-        echo  Dev: TanmayPlugs
+        echo Free Windows RDP
+        echo Dev: TanmayPlugs
         echo ============================
 
     - name: Enable RDP
@@ -32,7 +32,6 @@ jobs:
         Invoke-WebRequest https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-windows-amd64.exe -OutFile cloudflared.exe
 
     - name: Start Tunnel
-  run: |
-    ./cloudflared.exe tunnel --url tcp://localhost:3389
-  run:
-Start-Process cloudflared.exe
+      run: |
+        Start-Process cloudflared.exe -ArgumentList "tunnel --url tcp://localhost:3389"
+        Start-Sleep -Seconds 15
